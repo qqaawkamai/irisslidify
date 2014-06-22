@@ -1,0 +1,61 @@
+---
+title       : Iris Prediction App
+subtitle    : Predict the type of Iris
+author      : qqaawkamai
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## What does the app do?
+
+- Iris is a genus of flowering plants.
+- Iris means rainbow in Greek.
+- Pretty much the coolest looking flowers out there.
+- 3 species of Iris that are predicted in this model are:
+    - Iris setosa
+    - Iris versicolor
+    - Iris virgincia
+- Model takes the Petal and Sepal dimensions (length and width) and accurately
+predicts the species of Iris.
+
+--- .class #id 
+
+## The Data
+
+The Edgar Anderson Iris dataset (provided in R) is used in the app.
+
+```{r}
+data(iris)
+summary(iris)
+```
+
+--- .class #id
+
+## The Model
+
+Random Forest library is used to build a fairly accurate prediction model based on Sepal and Petal dimensions.
+
+```{r, results='hide'}
+library(randomForest)
+```
+
+```{r}
+modFit <- randomForest(Species ~., data=iris)
+modFit$err.rate[500,1]
+modFit$confusion
+```
+
+--- .class #id
+
+## The Model - continued
+
+- The model has a very low error rate (~5%).
+- From the confusion matrix, we see that very few are misclassified.
+- Thus, putting in the Petal and Sepal dimensions in the app, will accurately
+predict the species of iris.
+- [Link to Shiny App](https://qqaawkamai.shinyapps.io/iris/)
